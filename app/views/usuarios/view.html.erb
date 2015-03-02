@@ -1,0 +1,11 @@
+<%if current_user%>
+	<%if @user.id == current_user.id || current_user.Admi == true%>
+		<form action="/usuarios/edit/<%=@user.id%>">
+			<input type="submit" value="Editar información"/> 
+		</form><br>
+	<%end%>
+<%end%>
+
+Nombre: <%=@user.Name%> <%=@user.LastName%><br>
+Alias: <%=@user.Nickname%><br>
+Categoria en el juego: <%=@user.Type%><br>

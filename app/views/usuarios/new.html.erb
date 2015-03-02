@@ -1,0 +1,27 @@
+<form action="/usuarios/crearusu" method="post">
+	Nombre <input name="Name" type="text" /> <br>
+	Apellido <input name="LastName" type="text" /> <br>
+	Nickname <input name="Nickname" type="text" /> <br>
+	Sexo <select name="Genre">
+	<option value="Hombre">Masculino</option>
+	<option value="Mujer">Femenino</option>
+	</select><br>
+	Categoria <select name="Type">
+	<option value="Inical">Inicial</option>
+	<option value="Semiprofesional">Semiprofesional</option>
+	<option value="Profesional">Profesional</option>
+	<option value="Freestyler">Freestyle</option>
+	</select><br>
+	Email <input name="email" type="text" /> <br>
+	Fecha de Nacimiento <input name="Birthday" type="date" /> <br>
+	Contrasena <input name="password" type="password" /> <br>
+	Repetir Contrasena <input name="password_confirmation" type="password" /> <br>
+
+	<input name="Country" type="hidden" value="Bolivia" /> 
+ 	<input name="City" type="hidden" value="Cochabamba" /> 
+	<input type="hidden" name="Enable" value="false" />
+   
+ 	<input type="submit" />   
+ 	<input type="reset" />
+ 		<br>Aclaración: Para poder iniciar sección, uno de los administradores de esta web debera autorizarlo
+</form>

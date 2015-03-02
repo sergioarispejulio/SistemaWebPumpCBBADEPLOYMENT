@@ -1,0 +1,75 @@
+<center>
+
+<form>
+<%if(params[:ano] != nil && params[:mes] != nil)%>
+	  Año: <input type="number" name="ano" min="2015" value=<%=params[:ano]%>> mes: <input type="number" name="mes" min="1" max="12" value=<%=params[:mes]%>><br>
+  <input type="submit" value="Buscar">
+<%else%>
+	  Año: <input type="number" name="ano" min="2015" value=<%=Date.today.year%>> mes: <input type="number" name="mes" min="1" max="12" value=<%=Date.today.month%>><br>
+	  <input type="submit" value="Buscar">
+<%end%>
+</form>
+
+<br><br>
+<table BORDER="1" class="CSSTableGenerator">
+
+	<tr>
+		<td>Domingo</td>
+		<td>Lunes</td>
+		<td>Martes</td>
+		<td>Miercoles</td>
+		<td>Jueves</td>
+		<td>Viernes</td>
+		<td>Sabado</td>
+	</tr>
+
+	<tr>
+		<%for @i in 0..6%>
+
+			<td>
+				<%if (@recorrer > 0)%>
+					<%@recorrer = @recorrer - 1%>
+				<%else%>
+					<%=@cont %><br>
+
+					<% @lista.each do |elemento| %>
+						<%if elemento.date_modify == Date.new(@ano,@mes,@cont)%>
+							<a href="/event/<%=elemento.id%>"><%=elemento.name%> </a><br>
+						<%end%>
+					<%end%>
+
+					<%@cont = @cont + 1%>
+				<%end%>
+			</td>
+			
+		<%end%>
+	</tr>
+
+	<%for x in 0..3%>	
+		<tr>
+
+			<%for @i in 0..6%>
+				<td>
+					<%if (@cont <= @dias)%>
+						<%=@cont %><br>
+
+						<% @lista.each do |elemento| %>
+							<%if elemento.date_modify == Date.new(@ano,@mes,@cont)%>
+								<a href="event/<%=elemento.id%>"><%=elemento.name%> </a><br>
+							<%end%>
+						<%end%>
+
+						<%@cont = @cont + 1%>
+					<%else%>
+						&nbsp;
+					<%end%>
+				</td>
+				<%@i = @i + 1%>
+			<%end%>
+
+		</tr>
+	<%end%>
+
+</table>
+
+</center>

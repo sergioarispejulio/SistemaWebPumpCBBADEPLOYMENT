@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CalendarioPUMPCBBA</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+
+
+</head>
+<body class="<%= params[:controller] %>">
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+
+    <div class="navbar-header">
+      <div id="container">
+        <div class="user_nav">
+          <ul class="nav navbar-nav">
+            <a class="navbar-brand" href="#">Calendario CBBA</a>
+            <% if current_user %>
+              <li><%= link_to "Cerra seccion", logout_path %></li>
+              <li><a href="/event/newevent">Crear Evento</a></li>
+              <% if current_user.Admi == true%>
+                <li><a href="/event/viewnotaceptedevents">Ver eventos</a></li>
+                <li><a href="/usuarios/controlusers">Ver usuarios</a></li>
+              <%end%>
+              <li><a href="/usuarios/view/<%=current_user.id%>">Ver perfil</a></li>
+            <% else %>
+              <li><%= link_to "Crear cuenta", signup_path %></li>
+              <li><%= link_to "Iniciar seccion", login_path  %></li>
+            <% end %>   
+            <li><a href="/viewcalendario">Ver Calendario</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+ 
+<center>
+<div class="jumbotron">
+<%if Messenger.instance.devolvermensa != ""%>
+<center><%=Messenger.instance.devolvermensa%></center><br>
+<%Messenger.instance.limpiar%>
+<%end%>
+    <%= yield %>
+</center>
+</div>
+</body>
+</html>

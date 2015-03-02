@@ -1,0 +1,56 @@
+<table BORDER="1" class="CSSTableGenerator">
+	<tr>
+		<td>Nombre evento</td>
+		<td>Creador</td>
+		<td>Fecha creacion</td>
+		<td>Fecha modificacion</td>
+		<td>Usuario que creo el evento</td>
+		<td>¿Aceptar?</td>
+		<td>¿Eliminar?</td>
+	</tr>
+
+<% @evento.each do |elemento| %>
+	<tr>
+		<td>
+			<a href="/event/<%=elemento.id%>"><%=elemento.name%></a>
+		</td>
+		<td>
+			<%usu = User.find(elemento.iduser)%>
+			<a href="/usuarios/view/<%=usu.id%>"><%=usu.Name%> <%=usu.LastName%></a>
+		</td>
+		<td>
+			<%=elemento.date_create%>
+		</td>
+		<td>
+			<%=elemento.date_modify%>
+		</td>
+		<td>
+			<%usu = User.find(elemento.iduser)%>
+			<%=usu.Name + usu.LastName%>
+		</td>
+		<td>
+			<%if elemento.enable%>
+				<form action="/event/accept" method="post">
+					<input type="hidden" name="id" value="<%=elemento.id%>" />
+					<input type="hidden" name="enable" value="false" />
+					<input type="submit" value="Deshabilitar evento"/> 
+				</form>
+			<%else%>
+				<form action="/event/accept" method="post">
+					<input type="hidden" name="id" value="<%=elemento.id%>" />
+					<input type="hidden" name="enable" value="true" />
+					<input type="submit" value="Habilitar evento"/> 
+				</form>
+			<%end%>
+
+		</td>
+		<td>
+			<form action="/event/delete" method="post">
+				<input type="hidden" name="id" value="<%=elemento.id%>" />
+				<input type="submit" value="Eliminar evento"/> 
+			</form>
+		</td>
+	</tr>
+<%end%>
+
+</table>
